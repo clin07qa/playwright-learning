@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { userInfo, validUserForLogin, invalidUser } from './test-data.js';
+import { HomePage } from './pages/home.page.js';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.automationexercise.com/');
+  const homePage = new HomePage(page);
+  await homePage.goto();
 });
 
 test.describe('Test 1: Check Register User', () => {
@@ -113,12 +115,12 @@ test.describe('Test 1: Check Register User', () => {
     await expect(page?.locator('button[data-qa="create-account"]')).toBeVisible();
     await page?.locator('button[data-qa="create-account"]').click();
 
-    const continueBtn = expect(page.locator('a[data-qa="continue-button"]'));
+    const continueBtn = page.locator('a[data-qa="continue-button"]');
     await expect(page).toHaveURL(/(account_created)/g); // validate account create success page
     await expect(continueBtn).toBeVisible();
     await continueBtn.click();
 
-    const deleteAcctLink = await expect(page).locator('a[href="/delete_account"]');
+    const deleteAcctLink = await page.locator('a[href="/delete_account"]');
     await expect(deleteAcctLink).toBeVisible();
     await deleteAcctLink.click();
 
