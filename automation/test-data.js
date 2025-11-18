@@ -1,27 +1,20 @@
-export const TODO_ITEMS = [
-    'buy some cheese',
-    'feed the cat',
-    'book a doctors appointment'
-];
+import { faker } from "@faker-js/faker/locale/en_US";
 
-export const userInfo = {
-    userName: 'TestUser1',
-    email: 'testUserrrrr1@email.com',
-    fName: 'John',
-    lName: 'Doe',
-    password: 'passW0rd123$',
-    phoneNum: '1234567890',
-    company: 'ABC Test Co.',
-    address1: '123 Test Rd',
-    address2: 'Apt 4B',
+export const randomUser = {
+    userName: faker.internet.username(),
+    email: faker.internet.email(),
+    fName: faker.person.firstName(),
+    lName: faker.person.lastName(),
+    password: faker.internet.password({ length: 10 }),
+    phoneNum: faker.phone.number({ style: 'international' }),
+    address1: faker.location.streetAddress({ useFullAddress: false }),
     country: 'United States',
-    state: 'New York',
-    city: 'Brooklyn',
-    zipCode: '12345',
-    gender: 'M',
-    day: '10',
-    month: '6',
-    year: '1992',
+    state: faker.location.state({ abbreviated: true }),
+    city: faker.location.city(),
+    zipCode: faker.location.zipCode('#####'),
+    day: (faker.number.int({ min: 1, max: 30 })).toString(),
+    month: faker.date.month({ context: true }),
+    year: (faker.number.int({ min: 1900, max: 2021 })).toString(),
 }
 
 export const validUserForLogin = {
@@ -36,23 +29,3 @@ export const invalidUser = {
     email: 'test123@email.com',
     password: 'ZePjkFHGGVzp'
 }
-
-export const validColorList = ["Red", "Blue", "Green", "Yellow", "Red", "White", "Green"];
-
-export const validAnimalList = [
-    'cat',
-    'cheetah',
-    'deer',
-    'dog',
-    'elephant',
-    'fox',
-    'giraffe',
-    'hippo',
-    'kangaroo',
-    'lion',
-    'monkey',
-    'panda',
-    'rabbit',
-    'tiger',
-    'zebra'
-];
